@@ -6,6 +6,9 @@ Given a character from the alphabet, print a diamond of its output with that cha
 
 Examples
 
+
+  <pre>
+    <code>
 > diamond.exe A
   A
 
@@ -22,7 +25,6 @@ Examples
     A
 
 Hints
-
 It may be helpful visualise the whitespace in your rendering like this:
 
 > diamond.exe C
@@ -32,3 +34,5 @@ C _ _ _ C
 _ B _ B _
 _ _ A _ _
 
+</code>
+  </pre>
