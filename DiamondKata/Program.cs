@@ -22,7 +22,7 @@ namespace DiamondKata
                     var target = args[0].First();
                     if (args[0].Length > 0)
                     {
-                        Console.WriteLine($"Generate the Diamoind for: {target}");
+                        Console.WriteLine($"Generate the Diamond for: {target}");
                     }
                     Console.WriteLine(Diamond.BuildDiamond(target));
                 }
