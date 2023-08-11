@@ -3,7 +3,6 @@ namespace DiamondKara.Tests
     [TestClass]
     public class DiamondTests
     {
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Generate_WithNumberAsInput_ThrowsArgumentException()
@@ -12,7 +11,7 @@ namespace DiamondKara.Tests
             char target = '1'; // Invalid input, should be an uppercase letter
 
             // Act
-            Diamond.BuildDiamond(target);
+            new Diamond(target);
 
             // The method should throw an ArgumentException
         }
@@ -25,7 +24,7 @@ namespace DiamondKara.Tests
             char target = 'a'; // Invalid input, should be an uppercase letter
 
             // Act
-            Diamond.BuildDiamond(target);
+            new Diamond(target);
 
             // The method should throw an ArgumentException
         }
@@ -38,7 +37,8 @@ namespace DiamondKara.Tests
             string expectedOutput = "A";
                             
             // Act
-            string result = Diamond.BuildDiamond(target);
+            var diamond = new Diamond(target);
+            string result = diamond.ToString();
 
             // Assert
             Assert.AreEqual(expectedOutput, result);
@@ -53,7 +53,8 @@ namespace DiamondKara.Tests
             string expectedOutput = "A";
 
             // Act
-            string result = Diamond.BuildDiamond(target, separator);
+            var diamond = new Diamond(target, separator);
+            string result = diamond.ToString();
 
             // Assert
             Assert.AreEqual(expectedOutput, result);
@@ -63,19 +64,16 @@ namespace DiamondKara.Tests
         public void Generate_WithValidInput_ReturnsDiamondPattern()
         {
             // Arrange
-            char target = 'E';
-            string expectedOutput =   "    A    " +
-                                    "\n   B B   " +
-                                    "\n  C   C  " +
-                                    "\n D     D " +
-                                    "\nE       E" +
-                                    "\n D     D " +
-                                    "\n  C   C  " +
-                                    "\n   B B   " +
-                                    "\n    A    ";
+            char target = 'C';
+            string expectedOutput =   "  A  " +
+                                    "\n B B " +
+                                    "\nC   C" +
+                                    "\n B B " +
+                                    "\n  A  ";
 
             // Act
-            string result = Diamond.BuildDiamond(target);
+            var diamond = new Diamond(target);
+            string result = diamond.ToString();
 
             // Assert
             Assert.AreEqual(expectedOutput, result);
@@ -89,9 +87,9 @@ namespace DiamondKara.Tests
             string expectedOutput =   ".A." +
                                     "\nB.B" +
                                     "\n.A.";
-
             // Act
-            string result = Diamond.BuildDiamond(target, separator);
+            var diamond = new Diamond(target, separator);
+            string result = diamond.ToString();
 
             // Assert
             Assert.AreEqual(expectedOutput, result);
@@ -107,10 +105,37 @@ namespace DiamondKara.Tests
                                     "\n.A.";
 
             // Act
-            string result = Diamond.BuildDiamond(target);
+            var diamond = new Diamond(target);
+            string result = diamond.ToString();
 
             // Assert
             Assert.AreNotEqual(expectedOutput, result);
+        }
+
+
+        [TestMethod]
+        public void Generate_WithValidInput_DynamicTest()
+        {
+            // Arrange
+            char target = 'Z'; // we can generate here a random char between A and Z ...
+            
+            // Act
+            var diamond = new Diamond(target);
+            
+            // Assert
+            Assert.AreEqual((int)(target - 'A') * 2 + 1, diamond.DiamondLines.Length);
+
+            //check if the diamond is symetric
+            for (int i = 0; i < diamond.DiamondLines.Length / 2 + 1;i++)
+            {
+                Assert.AreEqual(diamond.DiamondLines[i], diamond.DiamondLines[diamond.DiamondLines.Length - 1 - i]);
+            }
+            // check if each line is symetric (palindrome)
+            foreach (var line in diamond.DiamondLines)
+            {
+                var result = string.Compare(line, string.Concat(line.Reverse())) == 0;
+                Assert.IsTrue(result);
+            }
         }
 
     }

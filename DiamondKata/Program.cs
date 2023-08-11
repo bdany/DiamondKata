@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-
-namespace DiamondKata
+﻿namespace DiamondKata
 {
     internal class Program
     {
@@ -24,7 +17,7 @@ namespace DiamondKata
                     {
                         Console.WriteLine($"Generate the Diamond for: {target}");
                     }
-                    Console.WriteLine(Diamond.BuildDiamond(target));
+                    Console.WriteLine(new Diamond(target));
                 }
             }
             catch (ArgumentException ex) 

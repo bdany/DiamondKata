@@ -1,11 +1,23 @@
 ﻿public class Diamond
 {
-    public static string BuildDiamond(char target)
+    private readonly char target;
+    private readonly char separator;
+
+    public Diamond(char target, char separator = ' ')
     {
-        return BuildDiamond(target, ' ');
+        this.target = target;
+        this.separator = separator; 
+        DiamondLines = BuildDiamond();
+    }
+    
+    public string[] DiamondLines { get; set; }
+
+    public override string ToString()
+    {
+        return string.Join("\n", DiamondLines);
     }
 
-    public static string BuildDiamond(char target, char separator)
+    private string[] BuildDiamond()
     {
         if (!char.IsLetter(target) || !char.IsUpper(target))
         {
@@ -19,6 +31,7 @@
             string leftHalf = new string(separator, width - i) + letter + new string(separator, i);
             return string.Concat(leftHalf.SkipReverse());
         });
-        return string.Join("\n", lines.SkipReverse());
+
+        return lines.SkipReverse().ToArray();
     }
 }
