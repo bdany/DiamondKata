@@ -113,11 +113,14 @@ namespace DiamondKara.Tests
         }
 
 
-        [TestMethod]
-        public void Generate_WithValidInput_DynamicTest()
+        [DataTestMethod]
+        [DataRow('A')]
+        [DataRow('C')]
+        [DataRow('Z')]
+        public void Generate_WithValidInput_DynamicTest(char input)
         {
             // Arrange
-            char target = 'Z'; // we can generate here a random char between A and Z ...
+            char target = input; 
             
             // Act
             var diamond = new Diamond(target);
