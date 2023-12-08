@@ -4,6 +4,11 @@
     
     public Diamond(char target, char separator = ' ')
     {
+        if (!char.IsLetter(target) || !char.IsUpper(target))
+        {
+            throw new ArgumentException("Input must be an uppercase letter [A - Z].", "target");
+        }
+        
         _diamondLines = BuildDiamond(target, separator);
     }
 
@@ -22,11 +27,6 @@
 
     private string[] BuildDiamond(char target, char separator)
     {
-        if (!char.IsLetter(target) || !char.IsUpper(target))
-        {
-            throw new ArgumentException("Input must be an uppercase letter [A - Z].", "target");
-        }
-
         int width = target - 'A';
         var lines = Enumerable.Range(0, width + 1).Select(i => {
             char letter = (char)('A' + i);
