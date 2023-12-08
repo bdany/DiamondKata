@@ -1,27 +1,30 @@
 ﻿public class Diamond
 {
-    private readonly char target;
-    private readonly char separator;
-
+    private string[] _diamondLines;
+    
     public Diamond(char target, char separator = ' ')
     {
-        this.target = target;
-        this.separator = separator; 
-        DiamondLines = BuildDiamond();
+        _diamondLines = BuildDiamond(target, separator);
     }
-    
-    public string[] DiamondLines { get; set; }
+
+    public string[] DiamondLines
+    {
+        get {
+
+            return _diamondLines;
+        }
+    }
 
     public override string ToString()
     {
-        return string.Join("\n", DiamondLines);
+        return string.Join("\n", _diamondLines);
     }
 
-    private string[] BuildDiamond()
+    private string[] BuildDiamond(char target, char separator)
     {
         if (!char.IsLetter(target) || !char.IsUpper(target))
         {
-            throw new ArgumentException("Input must be an uppercase letter [A - Z].");
+            throw new ArgumentException("Input must be an uppercase letter [A - Z].", "target");
         }
 
         int width = target - 'A';
